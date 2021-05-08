@@ -5,7 +5,6 @@ function App() {
   const [name, setName] = useState('')
 
   const renderForm = (name) => {
-    console.log('render', name)
     setName(name)
   }
   return (
