@@ -2,9 +2,10 @@ import { useState } from 'react'
 
 const SimpleInput = ({ renderForm }) => {
   const [enteredName, setEnteredName] = useState('')
+  const [enteredEmail, setEnteredEmail] = useState('')
   const [touched, setTouched] = useState(false)
 
-  const isValid = enteredName.trim() !== ''
+  const isValid = enteredName.trim() !== '' && enteredEmail.includes('@')
   const invalidInput = !isValid && touched
 
   let formIsValid = false
@@ -15,6 +16,10 @@ const SimpleInput = ({ renderForm }) => {
 
   const nameInputHandler = (e) => {
     setEnteredName(e.target.value)
+  }
+
+  const emailInputHandler = (e) => {
+    setEnteredEmail(e.target.value)
   }
 
   const inputBlurHandler = () => {
@@ -31,6 +36,7 @@ const SimpleInput = ({ renderForm }) => {
 
     renderForm(enteredName)
     setEnteredName('')
+    setEnteredEmail('')
     setTouched(false)
   }
 
@@ -48,6 +54,18 @@ const SimpleInput = ({ renderForm }) => {
           onBlur={inputBlurHandler}
         />
         {invalidInput && <p className='error-text'>Name cannot be empty</p>}
+      </div>
+
+      <div className={nameInputClass}>
+        <label htmlFor='email'>Your Email</label>
+        <input
+          type='email'
+          id='email'
+          value={enteredEmail}
+          onChange={emailInputHandler}
+          onBlur={inputBlurHandler}
+        />
+        {invalidInput && <p className='error-text'>Email cannot be empty</p>}
       </div>
       <div className='form-actions'>
         <button disabled={!formIsValid} onSubmit={formSubmitHandler}>
