@@ -7,6 +7,12 @@ const SimpleInput = ({ renderForm }) => {
   const isValid = enteredName.trim() !== ''
   const invalidInput = !isValid && touched
 
+  let formIsValid = false
+
+  if (isValid) {
+    formIsValid = true
+  }
+
   const nameInputHandler = (e) => {
     setEnteredName(e.target.value)
   }
@@ -44,7 +50,9 @@ const SimpleInput = ({ renderForm }) => {
         {invalidInput && <p className='error-text'>Name cannot be empty</p>}
       </div>
       <div className='form-actions'>
-        <button onSubmit={formSubmitHandler}>Submit</button>
+        <button disabled={!formIsValid} onSubmit={formSubmitHandler}>
+          Submit
+        </button>
       </div>
     </form>
   )
