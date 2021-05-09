@@ -35,7 +35,7 @@ const BasicForm = (props) => {
   const formSubmitHandler = (e) => {
     e.preventDefault()
 
-    if (!firstNameIsValid || !lastNameIsValid || !emailIsValid) {
+    if (!formIsValid) {
       return
     }
     resetFirstNameInput()
